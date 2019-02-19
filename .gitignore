@@ -1,5 +1,6 @@
 .DS_Store
 *~
 
-data.js
-index.js
+src/data.js
+src/index.js
+src/Sketcher.js
