@@ -1,9 +1,7 @@
-class UMLComponetBase {}
-class UMLComponetIcon {}
-class UMLComponetConnector {}
-class UMLComponetJoint {}
-class UMLComponetEdge {}
-
+/**
+ * D3.js でスケッチする人のためのクラスです。
+ * Ver 0.0.1 @2019-03-14 (Thu) 08:10:00 (JST)
+ */
 class Sketcher {
     constructor(options) {
         this._options = options;
@@ -21,12 +19,55 @@ class Sketcher {
             scale: 1
         };
     }
+    /**
+     * D3.Svg を作成するメソッド。
+     * これ単体で利用するみたいじゃね。
+     */
+    makeD3Svg () {
+        let w = this._options.w;
+        let h = this._options.h;
+
+        let selector = this._options.element.selector;
+
+        // let svg_tag = document.getElementById(selector);
+        let svg_tag = document.querySelector(selector);
+
+        if (!svg_tag)
+            throw new Error('Element Not Found. selector="' + selector + '"');
+
+        svg_tag.setAttribute('height' ,h);
+        svg_tag.setAttribute('width'  ,w);
+
+        let d3svg = new D3Svg({
+            d3: d3,
+            svg: d3.select(selector),
+            x: 0,
+            y: 0,
+            w: w,
+            h: h,
+            scale: this._options.scale,
+            callbacks: this._options.callbacks,
+        });
+
+        // this.makeBases(d3svg);
+        // this.drawBackground(d3svg);
+
+        return d3svg;
+    }
+    /**
+     * D3.Svg にベースとしての Group を追加する。
+     * g.background と g.forground は必ず作成される。
+     * 追加したい場合は、引数 base で追加指定可能。
+     *
+     * @param {Object}     d3svg - 描画場所としての D3.Svg
+     * @param {hash-table} base  - 追加で描画する Base
+     */
     makeBases (d3svg, base) {
         let svg = d3svg.Svg();
         let _base = [
-                { _id: -100, code: 'background' },
-                { _id: -150, code: 'forground' },
-            ];
+            { _id: -100, code: 'background' },
+            { _id: -150, code: 'forground' },
+        ];
 
         if (!base)
             base = _base;
@@ -41,6 +82,10 @@ class Sketcher {
                 return 'base ' + d.code;
             });
     }
+    /**
+     * d3svg に 罫線を描画する。
+     * @param {Object} d3svg - 描画場所としての D3.Svg
+     */
     drawBackground (d3svg) {
         let length = 8800;
         let start = length * -1;
@@ -98,78 +143,37 @@ class Sketcher {
             .attr('stroke', '#333333')
             .attr('stroke-width', 3);
     }
-    makeD3Svg () {
-        let w = this._options.w;
-        let h = this._options.h;
+    underpainting (base) {
+        this._d3svg = this.makeD3Svg();
 
-        let selector = this._options.element.selector;
+        this.makeBases(this._d3svg, base);
+        this.drawBackground(this._d3svg);
 
-        // let svg_tag = document.getElementById(selector);
-        let svg_tag = document.querySelector(selector);
-
-        if (!svg_tag)
-            throw new Error('Element Not Found. selector="' + selector + '"');
-
-        svg_tag.setAttribute('height' ,h);
-        svg_tag.setAttribute('width'  ,w);
-
-        let d3svg = new D3Svg({
-            d3: d3,
-            svg: d3.select(selector),
-            x: 0,
-            y: 0,
-            w: w,
-            h: h,
-            scale: this._options.scale,
-            callbacks: this._options.callbacks,
-        });
-
-        this.makeBases(d3svg);
-        this.drawBackground(d3svg);
-
-        return d3svg;
+        return this;
     }
     /* **************************************************************** *
-       Data manegement
-       * **************************************************************** */
+     * Data manegement
+     * **************************************************************** */
     data(list) {
         this._data =  list;
 
         return this;
     }
     /* **************************************************************** *
-       Sizing
-       * **************************************************************** */
+     * Sizing
+     * **************************************************************** */
     sizing () {
         return this;
     }
     /* **************************************************************** *
-       Positioning
-       * **************************************************************** */
+     * Positioning
+     * **************************************************************** */
     positioning () {
         return this;
     }
     /* **************************************************************** *
-       Draw
-       * **************************************************************** */
+     * Draw
+     * **************************************************************** */
     draw (place) {
-        let data = this._data;
-
-        place.selectAll('rect.sample')
-            .data(data, (d) => { return d._id; })
-            .enter()
-            .append('rect')
-            .attr('class', 'sample')
-            .attr('x', (d) => { return d.x;})
-            .attr('y', (d) => { return d.y;})
-            .attr('width', (d) => { return d.w;})
-            .attr('height', (d) => { return d.h;})
-            .attr('rx', (d) => { return d.r;})
-            .attr('ry', (d) => { return d.r;})
-            .attr('fill', (d) => {
-                return d.background.color;
-            })
-            .attr('stroke', (d) => { return d.stroke.color; })
-            .attr('stroke-width', (d) => { return d.stroke.width; });
     }
 }
