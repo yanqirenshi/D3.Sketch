@@ -10,7 +10,7 @@ function dump() {
     let svg = d3svg.Svg();
     let forground = svg.selectAll('g.base.forground');
 
-    new Sketcher()
+    new DefaultSketcher()
         .data(_DATA)
         .sizing()
         .positioning()

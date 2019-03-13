@@ -3,4 +3,4 @@
 
 src/data.js
 src/index.js
-src/Sketcher.js
+src/DefaultSketcher.js
