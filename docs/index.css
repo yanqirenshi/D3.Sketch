@@ -1,0 +1,18 @@
+app > .page {
+    width: 100vw;
+    overflow: hidden;
+    display: block;
+}
+
+app .hide {
+ display: none;
+}
+
+
+app .section > .container > .contents {
+    padding-left: 33px;
+}
+
+app .contents ol{
+    margin-left: 22px;
+}

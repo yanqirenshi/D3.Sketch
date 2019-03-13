@@ -1,4 +1,4 @@
-riot.tag2('app', '<menu-bar brand="{{label:\'RT\'}}" site="{site()}" moves="{[]}"></menu-bar> <div ref="page-area"></div>', 'app > .page { width: 100vw; overflow: hidden; display: block; } app .hide,[data-is="app"] .hide{ display: none; }', '', function(opts) {
+riot.tag2('app', '<menu-bar brand="{{label:\'RT\'}}" site="{site()}" moves="{[]}"></menu-bar> <div ref="page-area"></div>', '', '', function(opts) {
      this.site = () => {
          return STORE.state().get('site');
      };
@@ -189,7 +189,27 @@ riot.tag2('home', '', '', '', function(opts) {
      this.on('update', () => { this.draw(); });
 });
 
-riot.tag2('home_page_root', '<section-header title="HOME"></section-header>', '', '', function(opts) {
+riot.tag2('home_page_root', '<section-header title="D3.Sketch"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <home_tab_readme class="hide"></home_tab_readme> <home_tab_usage class="hide"></home_tab_usage> </div> <section-footer></section-footer>', '', '', function(opts) {
+     this.page_tabs = new PageTabs([
+         {code: 'readme',  label: 'README',  tag: 'home_tab_readme' },
+         {code: 'usage',   label: 'Usage',   tag: 'home_tab_usage' },
+     ]);
+
+     this.on('mount', () => {
+         this.page_tabs.switchTab(this.tags)
+         this.update();
+     });
+
+     this.clickTab = (e, action, data) => {
+         if (this.page_tabs.switchTab(this.tags, data.code))
+             this.update();
+     };
+});
+
+riot.tag2('home_tab_readme', '<section class="section"> <div class="container"> <h1 class="title is-4"></h1> <h2 class="subtitle"></h2> <p>D3.js で絵を描くときに、単体の作り込みをしたいときがあります。</p> <p>そのためのツールです。</p> </div> </section> <section class="section"> <div class="container"> <h1 class="title is-4">Dependency</h1> <h2 class="subtitle"></h2> <div class="contents"> <ol> <li><a href="https://d3js.org/">D3.js</a></li> <li><a href="https://bulma.io/">Bulma</a></li> </ol> </div> </div> </section> <section class="section"> <div class="container"> <h1 class="title is-4">Authors</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>Satoshi Iwasaki (<a href="mailto:yanqirenshi@gmail.com">yanqirenshi@gmail.com</a>)</p> </div> </div> </section> <section class="section"> <div class="container"> <h1 class="title is-4">Copyright</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>Copyright (c) 2018 Satoshi Iwasaki (<a href="mailto:yanqirenshi@gmail.com">yanqirenshi@gmail.com</a>)</p> </div> </div> </section> <section class="section"> <div class="container"> <h1 class="title is-4">Licence</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>This software is released under the GNU GENERAL PUBLIC LICENSE Version 3, see <a href="http://www.gnu.org/licenses/gpl-3.0.txt">LICENSE</a>.</p> </div> </div> </section>', '', '', function(opts) {
+});
+
+riot.tag2('home_tab_usage', '<section class="section"> <div class="container"> <h1 class="title">使い方はかんたんです。</h1> <h2 class="subtitle"></h2> <div class="contents"> <p><code>./src/index.html</code> をブラウザで開くだけで動きます。</p> <p><code>`./src/sketch.js</code> を変更しながら、D3.js の描画とそのデータを作り込んでいきます。</p> </div> </div> </section>', '', '', function(opts) {
 });
 
 riot.tag2('objects', '', '', '', function(opts) {
@@ -199,7 +219,7 @@ riot.tag2('objects', '', '', '', function(opts) {
      this.on('update', () => { this.draw(); });
 });
 
-riot.tag2('objects_root', '<section-header title="Sketcher"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <objects_tab_readme class="hide"></objects_tab_readme> <objects_tab_options class="hide"></objects_tab_options> <objects_tab_usage class="hide"></objects_tab_usage> </div> <section-footer></section-footer>', '', '', function(opts) {
+riot.tag2('objects_root', '<section-header title="Class: Sketcher"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <objects_tab_readme class="hide"></objects_tab_readme> <objects_tab_options class="hide"></objects_tab_options> <objects_tab_usage class="hide"></objects_tab_usage> </div> <section-footer></section-footer>', '', '', function(opts) {
      this.page_tabs = new PageTabs([
          {code: 'readme',  label: 'README',  tag: 'objects_tab_readme' },
          {code: 'usage',   label: 'Usage',   tag: 'objects_tab_usage' },
@@ -245,7 +265,7 @@ riot.tag2('objects_tab_options-selector', '<section class="section"> <div class=
 riot.tag2('objects_tab_options', '<objects_tab_options-description></objects_tab_options-description> <objects_tab_options-selector></objects_tab_options-selector> <objects_tab_options-callbacks></objects_tab_options-callbacks>', '', '', function(opts) {
 });
 
-riot.tag2('objects_tab_readme', '', '', '', function(opts) {
+riot.tag2('objects_tab_readme', '<section class="section"> <div class="container"> <h1 class="title">概要</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>Class: Sketcher は D3.Sketch の中核を成すクラスです。</p> <p>このクラスを利用すれば、標準で必要なものを描いてくれたりするので便利です。</p> <p>他でのこのクラスを利用する場合は、Class: Sketcher を継承したクラスを新設して利用してください。</p> </div> </div> </section>', '', '', function(opts) {
 });
 
 riot.tag2('objects_tab_usage', '<section class="section"> <div class="container"> <h1 class="title is-4">HTML</h1> <h2 class="subtitle"> </h2> <div class="contents"> <p><pre>{html.join(\'\\n\')}</pre></p> </div> </div> </section> <section class="section"> <div class="container"> <h1 class="title is-4">Javascript</h1> <h2 class="subtitle"></h2> <div class="contents"> <p><pre>{js.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {

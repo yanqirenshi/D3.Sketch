@@ -1,5 +1,5 @@
 <objects_root>
-    <section-header title="Sketcher"></section-header>
+    <section-header title="Class: Sketcher"></section-header>
 
     <page-tabs core={page_tabs} callback={clickTab}></page-tabs>
 
