@@ -1,4 +1,4 @@
-riot.tag2('app', '<menu-bar brand="{{label:\'RT\'}}" site="{site()}" moves="{[]}"></menu-bar> <div ref="page-area"></div>', 'app > .page { width: 100vw; height: 100vh; overflow: hidden; display: block; } app .hide,[data-is="app"] .hide{ display: none; }', '', function(opts) {
+riot.tag2('app', '<menu-bar brand="{{label:\'RT\'}}" site="{site()}" moves="{[]}"></menu-bar> <div ref="page-area"></div>', 'app > .page { width: 100vw; overflow: hidden; display: block; } app .hide,[data-is="app"] .hide{ display: none; }', '', function(opts) {
      this.site = () => {
          return STORE.state().get('site');
      };
@@ -30,7 +30,7 @@ riot.tag2('markdown-preview', '', 'markdown-preview h1 { font-weight: bold; font
 
 });
 
-riot.tag2('menu-bar', '<aside class="menu"> <p ref="brand" class="menu-label" onclick="{clickBrand}"> {opts.brand.label} </p> <ul class="menu-list"> <li each="{opts.site.pages}"> <a class="{opts.site.active_page==code ? \'is-active\' : \'\'}" href="{\'#\' + code}"> {menu_label} </a> </li> </ul> </aside> <div class="move-page-menu hide" ref="move-panel"> <p each="{moves()}"> <a href="{href}">{label}</a> </p> </div>', 'menu-bar .move-page-menu { z-index: 666665; background: #ffffff; position: fixed; left: 55px; top: 0px; min-width: 111px; height: 100vh; box-shadow: 2px 0px 8px 0px #e0e0e0; padding: 22px 55px 22px 22px; } menu-bar .move-page-menu.hide { display: none; } menu-bar .move-page-menu > p { margin-bottom: 11px; } menu-bar > .menu { z-index: 666666; height: 100vh; width: 55px; padding: 11px 0px 11px 11px; position: fixed; left: 0px; top: 0px; background: #e198b4; } menu-bar .menu-label, menu-bar .menu-list a { padding: 0; width: 33px; height: 33px; text-align: center; margin-top: 8px; border-radius: 3px; background: none; color: #ffffff; font-weight: bold; padding-top: 7px; font-size: 14px; } menu-bar .menu-label,[data-is="menu-bar"] .menu-label{ background: #ffffff; color: #e198b4; } menu-bar .menu-label.open,[data-is="menu-bar"] .menu-label.open{ background: #ffffff; color: #e198b4; width: 44px; border-radius: 3px 0px 0px 3px; text-shadow: 0px 0px 1px #eee; padding-right: 11px; } menu-bar .menu-list a.is-active { width: 44px; padding-right: 11px; border-radius: 3px 0px 0px 3px; background: #ffffff; color: #333333; }', '', function(opts) {
+riot.tag2('menu-bar', '<aside class="menu"> <p ref="brand" class="menu-label" onclick="{clickBrand}"> {opts.brand.label} </p> <ul class="menu-list"> <li each="{opts.site.pages}"> <a class="{opts.site.active_page==code ? \'is-active\' : \'\'}" href="{\'#\' + code}"> {menu_label} </a> </li> </ul> </aside> <div class="move-page-menu hide" ref="move-panel"> <p each="{moves()}"> <a href="{href}">{label}</a> </p> </div>', 'menu-bar .move-page-menu { z-index: 666665; background: #ffffff; position: fixed; left: 55px; top: 0px; min-width: 111px; height: 100vh; box-shadow: 2px 0px 8px 0px #e0e0e0; padding: 22px 55px 22px 22px; } menu-bar .move-page-menu.hide { display: none; } menu-bar .move-page-menu > p { margin-bottom: 11px; } menu-bar > .menu { z-index: 666666; height: 100vh; width: 55px; padding: 11px 0px 11px 11px; position: fixed; left: 0px; top: 0px; background: #FAF5F9; } menu-bar .menu-label, menu-bar .menu-list a { padding: 0; width: 33px; height: 33px; text-align: center; margin-top: 8px; border-radius: 3px; background: none; color: #333333; font-weight: bold; padding-top: 7px; font-size: 14px; } menu-bar .menu-label,[data-is="menu-bar"] .menu-label{ background: #ffffff; color: #FAF5F9; } menu-bar .menu-label.open,[data-is="menu-bar"] .menu-label.open{ background: #ffffff; color: #333333; width: 44px; border-radius: 3px 0px 0px 3px; text-shadow: 0px 0px 1px #eee; padding-right: 11px; } menu-bar .menu-list a.is-active { width: 44px; padding-right: 11px; border-radius: 3px 0px 0px 3px; background: #ffffff; color: #333333; }', '', function(opts) {
      this.moves = () => {
          let moves = [
              { code: 'link-a', href: '', label: 'Link A' },
@@ -192,45 +192,18 @@ riot.tag2('home', '', '', '', function(opts) {
 riot.tag2('home_page_root', '<section-header title="HOME"></section-header>', '', '', function(opts) {
 });
 
-riot.tag2('page01', '', '', '', function(opts) {
+riot.tag2('objects', '', '', '', function(opts) {
      this.mixin(MIXINS.page);
 
      this.on('mount', () => { this.draw(); });
      this.on('update', () => { this.draw(); });
 });
 
-riot.tag2('page01_page1', '<section-header-with-breadcrumb title="Page01 Sec 1"></section-header-with-breadcrumb>', '', '', function(opts) {
-});
-
-riot.tag2('page01_page2', '<section-header-with-breadcrumb title="Page01 Sec 2"></section-header-with-breadcrumb>', '', '', function(opts) {
-});
-
-riot.tag2('page01_page3', '<section-header-with-breadcrumb title="Page01 Sec 3"></section-header-with-breadcrumb>', '', '', function(opts) {
-});
-
-riot.tag2('page01_page_root', '<section-header title="Page01"></section-header> <section-container title="セクション" data="{sections()}"> <sections-list data="{opts.data}"> </sections-list> </section-container> <section-footer></section-footer>', '', '', function(opts) {
-     this.sections = () => {
-         let pages = STORE.get('site').pages;
-         let page = pages.find((d) => { return d.code=='page01'; });
-
-         return page.sections;
-     }
-});
-
-riot.tag2('page02', '', '', '', function(opts) {
-     this.mixin(MIXINS.page);
-
-     this.on('mount', () => { this.draw(); });
-     this.on('update', () => { this.draw(); });
-});
-
-riot.tag2('page02_page_root', '<section-header title="Page02"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <page02_page_tab_readme class="hide"></page02_page_tab_readme> <page02_page_tab_tab1 class="hide"></page02_page_tab_tab1> <page02_page_tab_tab2 class="hide"></page02_page_tab_tab2> <page02_page_tab_tab3 class="hide"></page02_page_tab_tab3> <page02_page_tab_help class="hide"></page02_page_tab_help> </div> <section-footer></section-footer>', '', '', function(opts) {
+riot.tag2('objects_root', '<section-header title="Sketcher"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <objects_tab_readme class="hide"></objects_tab_readme> <objects_tab_options class="hide"></objects_tab_options> <objects_tab_usage class="hide"></objects_tab_usage> </div> <section-footer></section-footer>', '', '', function(opts) {
      this.page_tabs = new PageTabs([
-         {code: 'readme', label: 'README', tag: 'page02_page_tab_readme' },
-         {code: 'tab1',   label: 'TAB1',   tag: 'page02_page_tab_tab1' },
-         {code: 'tab2',   label: 'TAB2',   tag: 'page02_page_tab_tab2' },
-         {code: 'tab3',   label: 'TAB3',   tag: 'page02_page_tab_tab3' },
-         {code: 'help',   label: 'HELP',   tag: 'page02_page_tab_help' },
+         {code: 'readme',  label: 'README',  tag: 'objects_tab_readme' },
+         {code: 'usage',   label: 'Usage',   tag: 'objects_tab_usage' },
+         {code: 'options', label: 'Options', tag: 'objects_tab_options' },
      ]);
 
      this.on('mount', () => {
@@ -244,27 +217,75 @@ riot.tag2('page02_page_root', '<section-header title="Page02"></section-header> 
      };
 });
 
-riot.tag2('page02_page_tab_help', '<section class="section"> <div class="container"> <h1 class="title">HELP</h1> <h2 class="subtitle"> </h2> <div class="contents"> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('objects_tab_options-callbacks', '<section class="section"> <div class="container"> <h1 class="title is-4">Callbacks</h1> <h2 class="subtitle"></h2> <div class="contents"> <table class="table is-bordered is-striped is-narrow is-hoverable"> <thead> <tr> <th>Code</th> <th>Name</th> <th>Description</th> </tr> </thead> <tbody> <tr each="{cb in callbacks}"> <td>{cb.code}</td> <td>{cb.name}</td> <td>{cb.description}</td> </tr> </tbody> </table> </div> </div> </section>', '', '', function(opts) {
+     this.callbacks = [
+         { code: 'svg.click',    name: '', description: '' },
+         { code: 'svg.move.end', name: '', description: '' },
+         { code: 'svg.zoom',     name: '', description: '' },
+     ];
 });
 
-riot.tag2('page02_page_tab_readme', '<section class="section"> <div class="container"> <h1 class="title">README</h1> <h2 class="subtitle"> </h2> <div class="contents"> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('objects_tab_options-description', '<section class="section"> <div class="container"> <h1 class="title is-4">概要</h1> <h2 class="subtitle"></h2> <div class="contents"> <table class="table is-bordered is-striped is-narrow is-hoverable"> <thead> <tr> <th>Code</th> <th>Type</th> <th>非推奨</th> <th>Description</th> </tr> </thead> <tbody> <tr each="{attr in attributes}"> <td>{attr.code}</td> <td>{attr.type}</td> <td>{attr.deprecated ? \'○\' : \'--\'}</td> <td>{attr.description}</td> </tr> </tbody> </table> </div> </div> </section>', '', '', function(opts) {
+     this.attributes = [
+         { code: 'selector',  type: 'String',     deprecated: false, description: '描画する場所を指定する。 ex) sample-tag > svg' },
+         { code: 'd3',        type: 'Object',     deprecated: true,  description: '' },
+         { code: 'svg',       type: 'Object',     deprecated: true,  description: '描画する場所を指定する。 ex) d3.select(selector)' },
+         { code: 'w',         type: 'Number',     deprecated: false, description: '描画する場所のサイズ' },
+         { code: 'y',         type: 'Number',     deprecated: false, description: '描画する場所のサイズ' },
+         { code: 'x',         type: 'Number',     deprecated: false, description: '初期のカメラの位置' },
+         { code: 'y',         type: 'Number',     deprecated: false, description: '初期のカメラの位置' },
+         { code: 'scale',     type: 'Number',     deprecated: false, description: '初期のカメラ倍率' },
+         { code: 'callbacks', type: 'Hash Table', deprecated: false, description: '' },
+     ];
 });
 
-riot.tag2('page02_page_tab_tab1', '<section class="section"> <div class="container"> <h1 class="title">TAB1</h1> <h2 class="subtitle"> </h2> <div class="contents"> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('objects_tab_options-selector', '<section class="section"> <div class="container"> <h1 class="title is-4">Selector</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>このセレクターで指定したものはユニークになるようにしてください。</p> <p>複数取得出来た場合は最初のものを利用します。</p> <p>また、複数取得出来た場合は警告をコンソールに出力します。</p> </div> </div> </section>', '', '', function(opts) {
 });
 
-riot.tag2('page02_page_tab_tab2', '<section class="section"> <div class="container"> <h1 class="title">TAB2</h1> <h2 class="subtitle"> </h2> <div class="contents"> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('objects_tab_options', '<objects_tab_options-description></objects_tab_options-description> <objects_tab_options-selector></objects_tab_options-selector> <objects_tab_options-callbacks></objects_tab_options-callbacks>', '', '', function(opts) {
 });
 
-riot.tag2('page02_page_tab_tab3', '<section class="section"> <div class="container"> <h1 class="title">TAB3</h1> <h2 class="subtitle"> </h2> <div class="contents"> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('objects_tab_readme', '', '', '', function(opts) {
 });
 
-riot.tag2('page03', '', '', '', function(opts) {
-     this.mixin(MIXINS.page);
+riot.tag2('objects_tab_usage', '<section class="section"> <div class="container"> <h1 class="title is-4">HTML</h1> <h2 class="subtitle"> </h2> <div class="contents"> <p><pre>{html.join(\'\\n\')}</pre></p> </div> </div> </section> <section class="section"> <div class="container"> <h1 class="title is-4">Javascript</h1> <h2 class="subtitle"></h2> <div class="contents"> <p><pre>{js.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {
+        this.html = [
+        '<html>',
+        '    <head>',
+        '        <script src="Sketcher.js"><\/script>',
+        '    </head>',
+        '',
+        '    <body>',
+        '        <sample-tag>',
+        '            <svg></svg>',
+        '        </sample-tag>',
+        '    </body>',
+        '</html>',
+        ];
 
-     this.on('mount', () => { this.draw(); });
-     this.on('update', () => { this.draw(); });
-});
-
-riot.tag2('page03_page_root', '<section-header title="Page03"></section-header> <section-footer></section-footer>', '', '', function(opts) {
+        this.js = [
+        "let camera = {",
+        "    x: 0,",
+        "    y: 0.0,",
+        "    scale: 1.0,",
+        "};",
+        "",
+        "new Sketcher({",
+        "    selector: 'sample-tag > svg',",
+        "    w: window.innerWidth,",
+        "    h: window.innerHeight,",
+        "    x: camera.look_at.X,",
+        "    y: camera.look_at.Y,",
+        "    scale: camera.scale,",
+        "    callbacks: {",
+        "        svg: {",
+        "            click: () => { /* ... */ },",
+        "            move: {",
+        "                end: (position) => { /* ... */ },",
+        "            },",
+        "            zoom: (scale) => { /* ... */ },",
+        "        }",
+        "    }",
+        "});",
+        ];
 });
