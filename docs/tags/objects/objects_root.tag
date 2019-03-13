@@ -1,25 +1,21 @@
 <objects_root>
-    <section-header title="Page02"></section-header>
+    <section-header title="Sketcher"></section-header>
 
     <page-tabs core={page_tabs} callback={clickTab}></page-tabs>
 
     <div>
-        <objects_tab_readme class="hide"></objects_tab_readme>
-        <objects_tab_tab1   class="hide"></objects_tab_tab1>
-        <objects_tab_tab2   class="hide"></objects_tab_tab2>
-        <objects_tab_tab3   class="hide"></objects_tab_tab3>
-        <objects_tab_help   class="hide"></objects_tab_help>
+        <objects_tab_readme  class="hide"></objects_tab_readme>
+        <objects_tab_options class="hide"></objects_tab_options>
+        <objects_tab_usage   class="hide"></objects_tab_usage>
     </div>
 
     <section-footer></section-footer>
 
     <script>
      this.page_tabs = new PageTabs([
-         {code: 'readme', label: 'README', tag: 'objects_tab_readme' },
-         {code: 'tab1',   label: 'TAB1',   tag: 'objects_tab_tab1' },
-         {code: 'tab2',   label: 'TAB2',   tag: 'objects_tab_tab2' },
-         {code: 'tab3',   label: 'TAB3',   tag: 'objects_tab_tab3' },
-         {code: 'help',   label: 'HELP',   tag: 'objects_tab_help' },
+         {code: 'readme',  label: 'README',  tag: 'objects_tab_readme' },
+         {code: 'usage',   label: 'Usage',   tag: 'objects_tab_usage' },
+         {code: 'options', label: 'Options', tag: 'objects_tab_options' },
      ]);
 
      this.on('mount', () => {
