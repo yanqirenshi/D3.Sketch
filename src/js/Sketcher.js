@@ -82,6 +82,13 @@ class Sketcher {
                 return 'base ' + d.code;
             });
     }
+    getBase (name) {
+        if (!this._d3svg)
+            return null;
+        let svg = this._d3svg.Svg();
+
+        return svg.selectAll('g.base.' + name);
+    }
     /**
      * d3svg に 罫線を描画する。
      * @param {Object} d3svg - 描画場所としての D3.Svg
@@ -174,6 +181,5 @@ class Sketcher {
     /* **************************************************************** *
      * Draw
      * **************************************************************** */
-    draw (place) {
-    }
+    draw (place) {}
 }
