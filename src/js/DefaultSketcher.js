@@ -1,6 +1,8 @@
 class DefaultSketcher extends Sketcher{
     constructor(options) {
         super(options);
+
+        this.underpainting();
     }
     /* **************************************************************** *
        Data manegement
