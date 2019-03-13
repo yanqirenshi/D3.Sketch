@@ -4,12 +4,6 @@
     <div ref="page-area"></div>
 
     <style>
-     app > .page {
-         width: 100vw;
-         overflow: hidden;
-         display: block;
-     }
-     .hide { display: none; }
     </style>
 
     <script>
