@@ -41,8 +41,8 @@ class Sketcher {
         let d3svg = new D3Svg({
             d3: d3,
             svg: d3.select(selector),
-            x: 0,
-            y: 0,
+            x: this._options.x,
+            y: this._options.y,
             w: w,
             h: h,
             scale: this._options.scale,
