@@ -49,9 +49,6 @@ class Sketcher {
             callbacks: this._options.callbacks,
         });
 
-        // this.makeBases(d3svg);
-        // this.drawBackground(d3svg);
-
         return d3svg;
     }
     d3Svg () {
@@ -185,4 +182,12 @@ class Sketcher {
      * Draw
      * **************************************************************** */
     draw (place) {}
+    /* **************************************************************** *
+     * change
+     * **************************************************************** */
+    changeCanvasSize (w, h) {
+        let d3svg = this.d3Svg();
+
+        d3svg.setSize(w, h);
+    }
 }
