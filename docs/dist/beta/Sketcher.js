@@ -54,6 +54,9 @@ class Sketcher {
 
         return d3svg;
     }
+    d3Svg () {
+        return this._d3svg;
+    }
     /**
      * D3.Svg にベースとしての Group を追加する。
      * g.background と g.forground は必ず作成される。
@@ -81,6 +84,13 @@ class Sketcher {
             .attr('class', (d) => {
                 return 'base ' + d.code;
             });
+    }
+    getBase (name) {
+        if (!this._d3svg)
+            return null;
+        let svg = this._d3svg.Svg();
+
+        return svg.selectAll('g.base.' + name);
     }
     /**
      * d3svg に 罫線を描画する。
@@ -174,6 +184,5 @@ class Sketcher {
     /* **************************************************************** *
      * Draw
      * **************************************************************** */
-    draw (place) {
-    }
+    draw (place) {}
 }
