@@ -54,6 +54,9 @@ class Sketcher {
 
         return d3svg;
     }
+    d3Svg () {
+        return this._d3svg;
+    }
     /**
      * D3.Svg にベースとしての Group を追加する。
      * g.background と g.forground は必ず作成される。
