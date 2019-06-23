@@ -1,5 +1,5 @@
 /////
-///// Version 0.0.1
+///// Version 0.0.2
 /////
 ///// https://github.com/yanqirenshi/D3.Sketch/releases/tag/0.0.2
 /////
