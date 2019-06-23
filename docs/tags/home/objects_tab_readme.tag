@@ -85,8 +85,11 @@
 
     <script>
      this.cdn = [
+         { version: 'edge',  description: '', url: 'https://yanqirenshi.github.io/D3.Sketch/dist/edge/Sketcher.js' },
+         { version: 'edge',  description: '', url: 'https://yanqirenshi.github.io/D3.Sketch/dist/edge/DefaultSketcher.js' },
+         { version: '0.0.2', description: '', url: 'https://yanqirenshi.github.io/D3.Sketch/dist/0.0.2/Sketcher.js' },
+         { version: '0.0.2', description: '', url: 'https://yanqirenshi.github.io/D3.Sketch/dist/0.0.2/DefaultSketcher.js' },
          { version: '0.0.1', description: '', url: 'https://yanqirenshi.github.io/D3.Sketch/dist/0.0.1/Sketcher.js' },
-         { version: 'Beta',  description: 'Ver 0.0.1 の開発バージョン', url: 'https://yanqirenshi.github.io/D3.Sketch/dist/beta/Sketcher.js' },
      ];
     </script>
 
