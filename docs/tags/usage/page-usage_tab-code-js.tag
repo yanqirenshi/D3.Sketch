@@ -1,18 +1,16 @@
 <page-usage_tab-code-js>
 
-    <section class="section" style="padding-top: 0px;">
-        <div class="container">
-            <h1 class="title is-4">Javascript: index.js</h1>
-            <h2 class="subtitle"></h2>
+    <h1 class="title is-5" style="margin-bottom: 11px;">Javascript: index.js</h1>
 
-            <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;">
-                <p><pre>{js.join('\n')}</pre></p>
-            </div>
-        </div>
-    </section>
+    <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;">
+        <p><pre>{js.join('\n')}</pre></p>
+    </div>
 
     <script>
      this.js = [
+         "/////",
+         "///// Make Options",
+         "/////",
          "function makeCamera () {",
          "    return {",
          "        look: {",
@@ -32,20 +30,30 @@
          "    };",
          "}",
          "",
-         "let camera = makeCamera();",
-         "let size   = getSize();",
+         "function makeOption () {",
+         "    let camera = makeCamera();",
+         "    let size   = getSize();",
          "",
-         "let sketcher = new DefaultSketcher({",
-         "    element: {",
-         "        selector: 'svg#scketchbook',",
-         "    },",
-         "    w: size.w,",
-         "    h: size.h,",
-         "    x: camera.look.at.x,",
-         "    y: camera.look.at.y,",
-         "    scale: camera.scale,",
-         "});",
+         "    return {",
+         "        element: {",
+         "            selector: 'svg#scketchbook',",
+         "        },",
+         "        w: size.w,",
+         "        h: size.h,",
+         "        x: camera.look.at.x,",
+         "        y: camera.look.at.y,",
+         "        scale: camera.scale,",
+         "    };",
+         "}",
          "",
+         "/////",
+         "///// Make Sketcher (and Draw Grid)",
+         "/////",
+         "let sketcher = new DefaultSketcher(makeOption());",
+         "",
+         "/////",
+         "///// Draw Graph",
+         "/////",
          "function draw () {",
          "    let place = sketcher.getBase('forground');",
          "",

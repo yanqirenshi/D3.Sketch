@@ -1,15 +1,10 @@
 <page-usage_tab-code-html>
 
-    <section class="section" style="padding-top: 0px;">
-        <div class="container">
-            <h1 class="title is-4">HTML</h1>
-            <h2 class="subtitle">
-            </h2>
-            <div class="contents" style="font-size: 14px; line-height: 14px;">
-                <p><pre>{html.join('\n')}</pre></p>
-            </div>
-        </div>
-    </section>
+    <h1 class="title is-5" style="margin-bottom: 11px;">Html: index.html</h1>
+
+    <div class="contents" style="font-size: 14px; line-height: 14px;">
+        <p><pre>{html.join('\n')}</pre></p>
+    </div>
 
     <script>
      this.html = [

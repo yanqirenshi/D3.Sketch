@@ -1,15 +1,10 @@
 <page-usage_tab-code-data>
 
-    <section class="section" style="padding-top: 0px;">
-        <div class="container">
-            <h1 class="title is-4">Data: data.js</h1>
-            <h2 class="subtitle"></h2>
+    <h1 class="title is-5" style="margin-bottom: 11px;">Javascript: data.js</h1>
 
-            <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;">
-                <p><pre>{js.join('\n')}</pre></p>
-            </div>
-        </div>
-    </section>
+    <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;">
+        <p><pre>{js.join('\n')}</pre></p>
+    </div>
 
     <script>
      this.js = [

@@ -300,7 +300,7 @@ riot.tag2('page-usage', '<section-header title="Class: Sketcher"></section-heade
      };
 });
 
-riot.tag2('page-usage_tab-code-data', '<section class="section" style="padding-top: 0px;"> <div class="container"> <h1 class="title is-4">Data: data.js</h1> <h2 class="subtitle"></h2> <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{js.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('page-usage_tab-code-data', '<h1 class="title is-5" style="margin-bottom: 11px;">Javascript: data.js</h1> <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{js.join(\'\\n\')}</pre></p> </div>', '', '', function(opts) {
      this.js = [
          "const _DATA = [",
          "    {",
@@ -321,7 +321,7 @@ riot.tag2('page-usage_tab-code-data', '<section class="section" style="padding-t
      ];
 });
 
-riot.tag2('page-usage_tab-code-html', '<section class="section" style="padding-top: 0px;"> <div class="container"> <h1 class="title is-4">HTML</h1> <h2 class="subtitle"> </h2> <div class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{html.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('page-usage_tab-code-html', '<h1 class="title is-5" style="margin-bottom: 11px;">Html: index.html</h1> <div class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{html.join(\'\\n\')}</pre></p> </div>', '', '', function(opts) {
      this.html = [
          '<!DOCTYPE html>',
          '<html>',
@@ -342,8 +342,11 @@ riot.tag2('page-usage_tab-code-html', '<section class="section" style="padding-t
      ];
 });
 
-riot.tag2('page-usage_tab-code-js', '<section class="section" style="padding-top: 0px;"> <div class="container"> <h1 class="title is-4">Javascript: index.js</h1> <h2 class="subtitle"></h2> <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{js.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('page-usage_tab-code-js', '<h1 class="title is-5" style="margin-bottom: 11px;">Javascript: index.js</h1> <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{js.join(\'\\n\')}</pre></p> </div>', '', '', function(opts) {
      this.js = [
+         "/////",
+         "///// Make Options",
+         "/////",
          "function makeCamera () {",
          "    return {",
          "        look: {",
@@ -363,20 +366,30 @@ riot.tag2('page-usage_tab-code-js', '<section class="section" style="padding-top
          "    };",
          "}",
          "",
-         "let camera = makeCamera();",
-         "let size   = getSize();",
+         "function makeOption () {",
+         "    let camera = makeCamera();",
+         "    let size   = getSize();",
          "",
-         "let sketcher = new DefaultSketcher({",
-         "    element: {",
-         "        selector: 'svg#scketchbook',",
-         "    },",
-         "    w: size.w,",
-         "    h: size.h,",
-         "    x: camera.look.at.x,",
-         "    y: camera.look.at.y,",
-         "    scale: camera.scale,",
-         "});",
+         "    return {",
+         "        element: {",
+         "            selector: 'svg#scketchbook',",
+         "        },",
+         "        w: size.w,",
+         "        h: size.h,",
+         "        x: camera.look.at.x,",
+         "        y: camera.look.at.y,",
+         "        scale: camera.scale,",
+         "    };",
+         "}",
          "",
+         "/////",
+         "///// Make Sketcher (and Draw Grid)",
+         "/////",
+         "let sketcher = new DefaultSketcher(makeOption());",
+         "",
+         "/////",
+         "///// Draw Graph",
+         "/////",
          "function draw () {",
          "    let place = sketcher.getBase('forground');",
          "",
@@ -391,7 +404,7 @@ riot.tag2('page-usage_tab-code-js', '<section class="section" style="padding-top
      ];
 });
 
-riot.tag2('page-usage_tab-code', '<page-usage_tab-code-html></page-usage_tab-code-html> <page-usage_tab-code-data></page-usage_tab-code-data> <page-usage_tab-code-js></page-usage_tab-code-js>', '', '', function(opts) {
+riot.tag2('page-usage_tab-code', '<section class="section"> <div class="container"> <h1 class="title"></h1> <h2 class="subtitle"></h2> <div class="flex-root"> <div class="left"> <page-usage_tab-code-js></page-usage_tab-code-js> </div> <div class="right"> <page-usage_tab-code-html></page-usage_tab-code-html> <page-usage_tab-code-data></page-usage_tab-code-data> </div> </div> </div> </section>', 'page-usage_tab-code .flex-root { display: flex; } page-usage_tab-code .left { width: 444px; margin-right: 22px; } page-usage_tab-code .right { flex-grow: 1; display: flex; flex-direction: column; } page-usage_tab-code .right > * { margin-bottom: 22px; }', '', function(opts) {
 });
 
 riot.tag2('page-usage_tab-data', '', '', '', function(opts) {
