@@ -1,4 +1,4 @@
-<objects_tab_readme>
+<page-usage_tab-readme>
 
     <section class="section">
         <div class="container">
@@ -13,4 +13,4 @@
         </div>
     </section>
 
-</objects_tab_readme>
+</page-usage_tab-readme>

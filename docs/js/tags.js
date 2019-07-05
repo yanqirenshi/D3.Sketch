@@ -226,11 +226,11 @@ riot.tag2('objects', '', '', '', function(opts) {
      this.on('update', () => { this.draw(); });
 });
 
-riot.tag2('objects_root', '<section-header title="Class: Sketcher"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <objects_tab_readme class="hide"></objects_tab_readme> <objects_tab_options class="hide"></objects_tab_options> <objects_tab_usage class="hide"></objects_tab_usage> </div> <section-footer></section-footer>', '', '', function(opts) {
+riot.tag2('page-objects', '<section-header title="Class: Sketcher"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <page-objects_tab-readme class="hide"></page-objects_tab-readme> <page-objects_tab-sketcher class="hide"></page-objects_tab-sketcher> <page-objects_tab-default-sketcher class="hide"></page-objects_tab-default-sketcher> </div> <section-footer></section-footer>', '', '', function(opts) {
      this.page_tabs = new PageTabs([
-         {code: 'readme',  label: 'README',  tag: 'objects_tab_readme' },
-         {code: 'usage',   label: 'Usage',   tag: 'objects_tab_usage' },
-         {code: 'options', label: 'Options', tag: 'objects_tab_options' },
+         {code: 'readme',  label: 'README',                tag: 'page-objects_tab-readme' },
+         {code: 'usage',   label: 'Class:Sketcher',        tag: 'page-objects_tab-sketcher' },
+         {code: 'options', label: 'Class:DefaultSketcher', tag: 'page-objects_tab-default-sketcher' },
      ]);
 
      this.on('mount', () => {
@@ -244,7 +244,16 @@ riot.tag2('objects_root', '<section-header title="Class: Sketcher"></section-hea
      };
 });
 
-riot.tag2('objects_tab_options-callbacks', '<section class="section"> <div class="container"> <h1 class="title is-4">Callbacks</h1> <h2 class="subtitle"></h2> <div class="contents"> <table class="table is-bordered is-striped is-narrow is-hoverable"> <thead> <tr> <th>Code</th> <th>Name</th> <th>Description</th> </tr> </thead> <tbody> <tr each="{cb in callbacks}"> <td>{cb.code}</td> <td>{cb.name}</td> <td>{cb.description}</td> </tr> </tbody> </table> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('page-objects_tab-default-sketcher', '', '', '', function(opts) {
+});
+
+riot.tag2('page-objects_tab-readme', '<section class="section"> <div class="container"> <h1 class="title">概要</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>Class: Sketcher は D3.Sketch の中核を成すクラスです。</p> <p>このクラスを利用すれば、標準で必要なものを描いてくれたりするので便利です。</p> <p>他でのこのクラスを利用する場合は、Class: Sketcher を継承したクラスを新設して利用してください。</p> </div> </div> </section>', '', '', function(opts) {
+});
+
+riot.tag2('page-objects_tab-sketcher', '', '', '', function(opts) {
+});
+
+riot.tag2('page-usage_tab-options-callbacks', '<section class="section"> <div class="container"> <h1 class="title is-4">Callbacks</h1> <h2 class="subtitle"></h2> <div class="contents"> <table class="table is-bordered is-striped is-narrow is-hoverable"> <thead> <tr> <th>Code</th> <th>Name</th> <th>Description</th> </tr> </thead> <tbody> <tr each="{cb in callbacks}"> <td>{cb.code}</td> <td>{cb.name}</td> <td>{cb.description}</td> </tr> </tbody> </table> </div> </div> </section>', '', '', function(opts) {
      this.callbacks = [
          { code: 'svg.click',    name: '', description: '' },
          { code: 'svg.move.end', name: '', description: '' },
@@ -252,7 +261,7 @@ riot.tag2('objects_tab_options-callbacks', '<section class="section"> <div class
      ];
 });
 
-riot.tag2('objects_tab_options-description', '<section class="section"> <div class="container"> <h1 class="title is-4">概要</h1> <h2 class="subtitle"></h2> <div class="contents"> <table class="table is-bordered is-striped is-narrow is-hoverable"> <thead> <tr> <th>Code</th> <th>Type</th> <th>非推奨</th> <th>Description</th> </tr> </thead> <tbody> <tr each="{attr in attributes}"> <td>{attr.code}</td> <td>{attr.type}</td> <td>{attr.deprecated ? \'○\' : \'--\'}</td> <td>{attr.description}</td> </tr> </tbody> </table> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('page-usage_tab-options-description', '<section class="section"> <div class="container"> <h1 class="title is-4">概要</h1> <h2 class="subtitle"></h2> <div class="contents"> <table class="table is-bordered is-striped is-narrow is-hoverable"> <thead> <tr> <th>Code</th> <th>Type</th> <th>非推奨</th> <th>Description</th> </tr> </thead> <tbody> <tr each="{attr in attributes}"> <td>{attr.code}</td> <td>{attr.type}</td> <td>{attr.deprecated ? \'○\' : \'--\'}</td> <td>{attr.description}</td> </tr> </tbody> </table> </div> </div> </section>', '', '', function(opts) {
      this.attributes = [
          { code: 'selector',  type: 'String',     deprecated: false, description: '描画する場所を指定する。 ex) sample-tag > svg' },
          { code: 'd3',        type: 'Object',     deprecated: true,  description: '' },
@@ -266,53 +275,134 @@ riot.tag2('objects_tab_options-description', '<section class="section"> <div cla
      ];
 });
 
-riot.tag2('objects_tab_options-selector', '<section class="section"> <div class="container"> <h1 class="title is-4">Selector</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>このセレクターで指定したものはユニークになるようにしてください。</p> <p>複数取得出来た場合は最初のものを利用します。</p> <p>また、複数取得出来た場合は警告をコンソールに出力します。</p> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('page-usage_tab-options-selector', '<section class="section"> <div class="container"> <h1 class="title is-4">Selector</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>このセレクターで指定したものはユニークになるようにしてください。</p> <p>複数取得出来た場合は最初のものを利用します。</p> <p>また、複数取得出来た場合は警告をコンソールに出力します。</p> </div> </div> </section>', '', '', function(opts) {
 });
 
-riot.tag2('objects_tab_options', '<objects_tab_options-description></objects_tab_options-description> <objects_tab_options-selector></objects_tab_options-selector> <objects_tab_options-callbacks></objects_tab_options-callbacks>', '', '', function(opts) {
+riot.tag2('page-usage_tab-options', '<page-usage_tab-options-description></page-usage_tab-options-description> <page-usage_tab-options-selector></page-usage_tab-options-selector> <page-usage_tab-options-callbacks></page-usage_tab-options-callbacks>', '', '', function(opts) {
 });
 
-riot.tag2('objects_tab_readme', '<section class="section"> <div class="container"> <h1 class="title">概要</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>Class: Sketcher は D3.Sketch の中核を成すクラスです。</p> <p>このクラスを利用すれば、標準で必要なものを描いてくれたりするので便利です。</p> <p>他でのこのクラスを利用する場合は、Class: Sketcher を継承したクラスを新設して利用してください。</p> </div> </div> </section>', '', '', function(opts) {
+riot.tag2('page-usage', '<section-header title="Class: Sketcher"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <page-usage_tab-readme class="hide"></page-usage_tab-readme> <page-usage_tab-code class="hide"></page-usage_tab-code> <page-usage_tab-data></page-usage_tab-data> <page-usage_tab-options class="hide"></page-usage_tab-options> </div> <section-footer></section-footer>', '', '', function(opts) {
+     this.page_tabs = new PageTabs([
+         {code: 'readme',  label: 'README',  tag: 'page-usage_tab-readme' },
+         {code: 'usage',   label: 'Code',    tag: 'page-usage_tab-code' },
+         {code: 'data',    label: 'Data',    tag: 'page-usage_tab-data' },
+         {code: 'options', label: 'Options', tag: 'page-usage_tab-options' },
+     ]);
+
+     this.on('mount', () => {
+         this.page_tabs.switchTab(this.tags)
+         this.update();
+     });
+
+     this.clickTab = (e, action, data) => {
+         if (this.page_tabs.switchTab(this.tags, data.code))
+             this.update();
+     };
 });
 
-riot.tag2('objects_tab_usage', '<section class="section"> <div class="container"> <h1 class="title is-4">HTML</h1> <h2 class="subtitle"> </h2> <div class="contents"> <p><pre>{html.join(\'\\n\')}</pre></p> </div> </div> </section> <section class="section"> <div class="container"> <h1 class="title is-4">Javascript</h1> <h2 class="subtitle"></h2> <div class="contents"> <p><pre>{js.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {
-        this.html = [
-        '<html>',
-        '    <head>',
-        '        <script src="Sketcher.js"><\/script>',
-        '    </head>',
-        '',
-        '    <body>',
-        '        <sample-tag>',
-        '            <svg></svg>',
-        '        </sample-tag>',
-        '    </body>',
-        '</html>',
-        ];
+riot.tag2('page-usage_tab-code-data', '<section class="section" style="padding-top: 0px;"> <div class="container"> <h1 class="title is-4">Data: data.js</h1> <h2 class="subtitle"></h2> <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{js.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {
+     this.js = [
+         "const _DATA = [",
+         "    {",
+         "        x: 0,",
+         "        y: 0,",
+         "        w: 222,",
+         "        h: 333,",
+         "        r: 8,",
+         "        stroke: {",
+         "            color: '#333333',",
+         "            width: 1,",
+         "        },",
+         "        background: {",
+         "            color: '#fff'",
+         "        }",
+         "    }",
+         "];",
+     ];
+});
 
-        this.js = [
-        "let camera = {",
-        "    x: 0,",
-        "    y: 0.0,",
-        "    scale: 1.0,",
-        "};",
-        "",
-        "new Sketcher({",
-        "    selector: 'sample-tag > svg',",
-        "    w: window.innerWidth,",
-        "    h: window.innerHeight,",
-        "    x: camera.look_at.X,",
-        "    y: camera.look_at.Y,",
-        "    scale: camera.scale,",
-        "    callbacks: {",
-        "        svg: {",
-        "            click: () => { /* ... */ },",
-        "            move: {",
-        "                end: (position) => { /* ... */ },",
-        "            },",
-        "            zoom: (scale) => { /* ... */ },",
-        "        }",
-        "    }",
-        "});",
-        ];
+riot.tag2('page-usage_tab-code-html', '<section class="section" style="padding-top: 0px;"> <div class="container"> <h1 class="title is-4">HTML</h1> <h2 class="subtitle"> </h2> <div class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{html.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {
+     this.html = [
+         '<!DOCTYPE html>',
+         '<html>',
+         '    <head>',
+         '        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"><\/script>',
+         '        <script src="https://yanqirenshi.github.io/D3.Svg/dist/0.0.1/D3.Svg.js"><\/script>',
+         '',
+         '        <script src="https://yanqirenshi.github.io/D3.Sketch/dist/0.0.2/Sketcher.js"><\/script>',
+         '        <script src="https://yanqirenshi.github.io/D3.Sketch/dist/0.0.2/DefaultSketcher.js"><\/script>',
+         '    <\/head>',
+         '    <body>',
+         '        <svg id="scketchbook"><\/svg>',
+         '',
+         '        <script src="./data.js"><\/script>',
+         '        <script src="./index.js"><\/script>',
+         '    <\/body>',
+         '<\/html>',
+     ];
+});
+
+riot.tag2('page-usage_tab-code-js', '<section class="section" style="padding-top: 0px;"> <div class="container"> <h1 class="title is-4">Javascript: index.js</h1> <h2 class="subtitle"></h2> <div class="contents" class="contents" style="font-size: 14px; line-height: 14px;"> <p><pre>{js.join(\'\\n\')}</pre></p> </div> </div> </section>', '', '', function(opts) {
+     this.js = [
+         "function makeCamera () {",
+         "    return {",
+         "        look: {",
+         "            at: {",
+         "                x: 0,",
+         "                y: 0.0,",
+         "            },",
+         "        },",
+         "        scale: 1.0,",
+         "    };",
+         "}",
+         "",
+         "function getSize () {",
+         "    return {",
+         "        w: window.innerWidth,",
+         "        h: window.innerHeight,",
+         "    };",
+         "}",
+         "",
+         "let camera = makeCamera();",
+         "let size   = getSize();",
+         "",
+         "let sketcher = new DefaultSketcher({",
+         "    element: {",
+         "        selector: 'svg#scketchbook',",
+         "    },",
+         "    w: size.w,",
+         "    h: size.h,",
+         "    x: camera.look.at.x,",
+         "    y: camera.look.at.y,",
+         "    scale: camera.scale,",
+         "});",
+         "",
+         "function draw () {",
+         "    let place = sketcher.getBase('forground');",
+         "",
+         "    sketcher",
+         "        .data(_DATA)",
+         "        .sizing()",
+         "        .positioning()",
+         "        .draw(place);",
+         "};",
+         "",
+         "draw();",
+     ];
+});
+
+riot.tag2('page-usage_tab-code', '<page-usage_tab-code-html></page-usage_tab-code-html> <page-usage_tab-code-data></page-usage_tab-code-data> <page-usage_tab-code-js></page-usage_tab-code-js>', '', '', function(opts) {
+});
+
+riot.tag2('page-usage_tab-data', '', '', '', function(opts) {
+});
+
+riot.tag2('page-usage_tab-readme', '<section class="section"> <div class="container"> <h1 class="title">概要</h1> <h2 class="subtitle"></h2> <div class="contents"> <p>Class: Sketcher は D3.Sketch の中核を成すクラスです。</p> <p>このクラスを利用すれば、標準で必要なものを描いてくれたりするので便利です。</p> <p>他でのこのクラスを利用する場合は、Class: Sketcher を継承したクラスを新設して利用してください。</p> </div> </div> </section>', '', '', function(opts) {
+});
+
+riot.tag2('usage', '', '', '', function(opts) {
+     this.mixin(MIXINS.page);
+
+     this.on('mount', () => { this.draw(); });
+     this.on('update', () => { this.draw(); });
 });

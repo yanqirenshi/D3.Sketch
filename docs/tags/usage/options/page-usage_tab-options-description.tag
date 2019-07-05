@@ -1,4 +1,4 @@
-<objects_tab_options-description>
+<page-usage_tab-options-description>
 
     <section class="section">
         <div class="container">
@@ -42,4 +42,4 @@
      ];
     </script>
 
-</objects_tab_options-description>
+</page-usage_tab-options-description>

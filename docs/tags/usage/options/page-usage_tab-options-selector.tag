@@ -1,4 +1,4 @@
-<objects_tab_options-selector>
+<page-usage_tab-options-selector>
 
     <section class="section">
         <div class="container">
@@ -13,4 +13,4 @@
         </div>
     </section>
 
-</objects_tab_options-selector>
+</page-usage_tab-options-selector>

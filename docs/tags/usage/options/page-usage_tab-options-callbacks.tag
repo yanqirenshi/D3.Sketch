@@ -1,4 +1,4 @@
-<objects_tab_options-callbacks>
+<page-usage_tab-options-callbacks>
 
     <section class="section">
         <div class="container">
@@ -34,4 +34,4 @@
      ];
     </script>
 
-</objects_tab_options-callbacks>
+</page-usage_tab-options-callbacks>
