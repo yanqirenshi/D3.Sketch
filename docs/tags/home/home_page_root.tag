@@ -13,7 +13,7 @@
     <script>
      this.page_tabs = new PageTabs([
          {code: 'readme',  label: 'README',  tag: 'home_tab_readme' },
-         {code: 'usage',   label: 'Usage',   tag: 'home_tab_usage' },
+         {code: 'usage',   label: 'Example', tag: 'home_tab_usage' },
      ]);
 
      this.on('mount', () => {

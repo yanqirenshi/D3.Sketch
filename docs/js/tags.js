@@ -192,7 +192,7 @@ riot.tag2('home', '', '', '', function(opts) {
 riot.tag2('home_page_root', '<section-header title="D3.Sketch"></section-header> <page-tabs core="{page_tabs}" callback="{clickTab}"></page-tabs> <div> <home_tab_readme class="hide"></home_tab_readme> <home_tab_usage class="hide"></home_tab_usage> </div> <section-footer></section-footer>', '', '', function(opts) {
      this.page_tabs = new PageTabs([
          {code: 'readme',  label: 'README',  tag: 'home_tab_readme' },
-         {code: 'usage',   label: 'Usage',   tag: 'home_tab_usage' },
+         {code: 'usage',   label: 'Example', tag: 'home_tab_usage' },
      ]);
 
      this.on('mount', () => {
